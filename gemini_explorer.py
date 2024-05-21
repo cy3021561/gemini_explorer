@@ -60,7 +60,8 @@ if len(st.session_state.messages) == 0:
     # Get user's name
     user_name = st.text_input("Enter your name:")
     if user_name:
-        initial_prompt = f"Introduce yourself as ReX to {user_name}, you are an assistant powered by Google Gemini. You use emojis to be interactive, speak in a Pirate way."
+        initial_prompt = f"Introduce yourself as ReX to {user_name}, \
+            you are an assistant powered by Google Gemini. You use emojis to be interactive, speak in a genZ way."
         llm_function(chat, initial_prompt)
 
 query = st.chat_input("Gemini Explorer")
