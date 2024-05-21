@@ -3,18 +3,15 @@ import streamlit as st
 from vertexai.preview import generative_models
 from vertexai.preview.generative_models import GenerativeModel, Part, Content, ChatSession
 
+
+# Initailize environment variables
 project = "gemini-v1-423923"
 vertexai.init(project = project)
-
-config = generative_models.GenerationConfig(
-    temperature=0.4
-)
-model = GenerativeModel(
-    "gemini-pro",
-    generation_config = config
-)
+config = generative_models.GenerationConfig(temperature=0.4)
+model = GenerativeModel("gemini-pro", generation_config = config)
 chat = model.start_chat()
 
+# Call Gemini via VertexAI
 def llm_function(chat: ChatSession, query):
     response = chat.send_message(query)
     output = response.candidates[0].content.parts[0].text
@@ -36,6 +33,7 @@ def llm_function(chat: ChatSession, query):
         }
     )
 
+# Steamlit interface
 st.title("Gemini Explorer")
 
 # Initialize chat history
@@ -64,6 +62,7 @@ if len(st.session_state.messages) == 0:
             you are an assistant powered by Google Gemini. You use emojis to be interactive, speak in a genZ way."
         llm_function(chat, initial_prompt)
 
+# Input section for user questions
 query = st.chat_input("Gemini Explorer")
 
 if query:
